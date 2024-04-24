@@ -1,9 +1,9 @@
 package br.com.example.quiz.model.DTO.Question;
 
-import java.util.UUID;
+import jakarta.validation.constraints.NotBlank;
 
 public record DataRegisterQuestion(
-    String description,
-    UUID quizId
+    @NotBlank
+    String description
 ) {
 }

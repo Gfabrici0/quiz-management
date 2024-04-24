@@ -32,7 +32,7 @@ public class Quiz {
   @Column(name = "created_at", nullable = false)
   public LocalDate createdAt;
 
-  @Column(name = "created_at", nullable = false)
+  @Column(name = "name", nullable = false)
   public String name;
 
   @Column(name = "description", nullable = false)
@@ -42,7 +42,7 @@ public class Quiz {
   @JoinColumn(name = "creation_user_id")
   public User creationUserId;
 
-  @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true)
   public List<Question> questions = new ArrayList<>();
 
   public Quiz(DataRegisterQuiz dataRegisterQuiz, User user) {

@@ -12,7 +12,7 @@ public record DataQuestion(
   public DataQuestion(Question question) {
     this(
         question.getId(),
-        question.getQuizId().getId(),
+        question.getQuiz().getId(),
         question.getDescription()
     );
   }

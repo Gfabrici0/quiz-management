@@ -30,9 +30,6 @@ public class WebSecurityConfig {
   private TokenManager tokenManager;
 
   @Autowired
-  private ApplicationContext applicationContext;
-
-  @Autowired
   private UserService userService;
 
   @Bean
@@ -49,11 +46,11 @@ public class WebSecurityConfig {
         .csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(
           authorize -> authorize.requestMatchers(
-            HttpMethod.POST, "auth/user"
+            HttpMethod.POST, "/user"
           ).permitAll()
           .anyRequest().authenticated()
         )
-        .addFilter(new AuthenticatorConfig(authenticationManager, tokenManager, applicationContext, userService))
+        .addFilter(new AuthenticatorConfig(authenticationManager, tokenManager, userService))
         .addFilterBefore(
             new TokenValidationFilter(tokenManager, userService),
             UsernamePasswordAuthenticationFilter.class

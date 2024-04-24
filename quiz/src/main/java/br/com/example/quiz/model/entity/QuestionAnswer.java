@@ -1,6 +1,5 @@
 package br.com.example.quiz.model.entity;
 
-import br.com.example.quiz.model.DTO.Question.DataRegisterQuestion;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,8 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -17,8 +14,8 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "question")
-public class Question {
+@Table(name = "question_answer")
+public class QuestionAnswer {
 
   @Id
   @GeneratedValue(generator = "UUID")
@@ -30,16 +27,12 @@ public class Question {
   public String description;
 
   @ManyToOne
-  @JoinColumn(name = "quiz_id")
-  public Quiz quiz;
+  @JoinColumn(name = "question_id")
+  private Question question;
 
-  @OneToOne(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
-  private QuestionAnswer answers;
-
-
-  public Question(DataRegisterQuestion dataRegisterQuestion, Quiz quiz) {
-    this.description = dataRegisterQuestion.description();
-    this.quiz = quiz;
+  public QuestionAnswer(String description, Question question) {
+    this.description = description;
+    this.question = question;
   }
 
 }

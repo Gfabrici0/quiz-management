@@ -12,8 +12,8 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "response")
-public class Response {
+@Table(name = "quiz_answer")
+public class QuizAnswer {
 
   @Id
   @GeneratedValue(generator = "UUID")
@@ -21,13 +21,13 @@ public class Response {
   @Column(name = "id", updatable = false, nullable = false)
   public UUID id;
 
-  @ManyToMany
+  @ManyToOne
   @JoinColumn(name = "quiz_id")
-  public Quiz quizId;
+  public Quiz quiz;
 
-  @ManyToMany
+  @ManyToOne
   @JoinColumn(name = "user_id")
-  public User userId;
+  public User user;
 
   @Column(name = "created_at", updatable = false, nullable = false)
   public Date createdAt;

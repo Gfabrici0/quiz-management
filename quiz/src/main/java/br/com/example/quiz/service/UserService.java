@@ -57,7 +57,7 @@ public class UserService {
   }
 
   public DataUser findUserByEmail(String email) {
-    User user = userRepository.findByEmail(email)
+    User user = userRepository.findByLogin(email)
         .orElseThrow(() -> new UserNotFoundException("User not found"));
 
     return new DataUser(user);

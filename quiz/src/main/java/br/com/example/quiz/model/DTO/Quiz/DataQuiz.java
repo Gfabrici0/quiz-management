@@ -13,6 +13,7 @@ public record DataQuiz(
     LocalDate createdAt,
     String name,
     String description,
+    UUID creationUserId,
     List<DataQuestion> question
 ) {
   public DataQuiz(Quiz quiz) {
@@ -21,6 +22,7 @@ public record DataQuiz(
         quiz.getCreatedAt(),
         quiz.getName(),
         quiz.getDescription(),
+        quiz.getCreationUserId().getId(),
         quiz.getQuestions().stream().map(
             DataQuestion::new
         ).collect(Collectors.toList())

@@ -35,9 +35,6 @@ public class User implements UserDetails {
   @Column(name = "password", nullable = false)
   public String password;
 
-  @OneToMany(mappedBy = "user")
-  public List<Response> responses = new ArrayList<>();
-
   public User(DataRegisterUser dataRegisterUser) {
     login = dataRegisterUser.login();
     password = new BCryptPasswordEncoder().encode(dataRegisterUser.password());

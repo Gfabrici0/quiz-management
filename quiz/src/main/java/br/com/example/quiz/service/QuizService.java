@@ -1,5 +1,6 @@
 package br.com.example.quiz.service;
 
+import br.com.example.quiz.config.TokenHolder;
 import br.com.example.quiz.model.DTO.Quiz.DataQuiz;
 import br.com.example.quiz.model.DTO.Quiz.DataRegisterQuiz;
 import br.com.example.quiz.model.DTO.Quiz.DataUpdateQuiz;
@@ -7,7 +8,7 @@ import br.com.example.quiz.model.entity.Quiz;
 import br.com.example.quiz.model.entity.User;
 import br.com.example.quiz.repository.QuizRepository;
 import br.com.example.quiz.repository.UserRepository;
-import br.com.example.quiz.utils.TokenUtil;
+import com.auth0.jwt.JWT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +26,8 @@ public class QuizService {
   private UserRepository userRepository;
 
   public Quiz registerQuiz(DataRegisterQuiz dataRegisterQuiz) {
-    User user = userRepository.getUserById(UUID.fromString(TokenUtil.getAttributeFromToken("id")));
+    User user = userRepository.getUserById(UUID.fromString(JWT.decode(TokenHolder.getToken()).getClaim("id").asString()))
+        .orElseThrow(() -> new RuntimeException("Quiz not found"));
     return quizRepository.save(new Quiz(dataRegisterQuiz, user));
   }
 

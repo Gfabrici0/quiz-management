@@ -24,19 +24,15 @@ public class AuthenticatorConfig extends UsernamePasswordAuthenticationFilter {
 
   private final TokenManager tokenManager;
 
-  private final ApplicationContext applicationContext;
-
   private final UserService userService;
 
   public AuthenticatorConfig(
       AuthenticationManager authenticationManager,
       TokenManager tokenManager,
-      ApplicationContext applicationContext,
       UserService userService
   ) {
     this.authenticationManager = authenticationManager;
     this.tokenManager = tokenManager;
-    this.applicationContext = applicationContext;
     this.userService = userService;
     super.setAuthenticationManager(authenticationManager);
   }
